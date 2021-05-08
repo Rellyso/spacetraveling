@@ -110,10 +110,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const posts = postsResponse.results.map(post => {
     return {
-      slug: post.uid,
-      title: post.data.title,
-      subtitle: post.data.subtitle,
-      author: post.data.author,
+      uid: post.uid,
+      first_publication_date: format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR }),
+      data: {
+        title: post.data.title,
+        subtitle: post.data.subtitle,
+        author: post.data.author,
       first_publication_date: format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })
     }
   })
