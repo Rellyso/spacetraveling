@@ -68,20 +68,22 @@ export default function Home({ postsPagination }: HomeProps) {
     <>
       <main className={styles.homeContainer}>
         <div className={styles.homeContent}>
-          <a>
-            <h1>Como Utilizar Hooks</h1>
-            <p>Pensando em sincronização em vez de ciclos de vida.</p>
-            <div>
-              <time>
-                <FiCalendar />
+          {posts.map((post: Post) => (
+            <a key={post.uid}>
+              <h1>{post.data.title}</h1>
+              <p>{post.data.subtitle}</p>
+              <div>
+                <time>
+                  <FiCalendar />
                   {post.first_publication_date}
                 </time>
                 <span>
                   <FiUser />
-              Joseph Oliveira
-            </span>
-            </div>
-          </a>
+                  {post.data.author}
+                </span>
+              </div>
+            </a>
+          ))}
 
           {!!nextPage && (
             <button type="button" onClick={handleNextPageData}>
