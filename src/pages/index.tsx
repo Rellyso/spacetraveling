@@ -98,11 +98,14 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
-  console.log(JSON.stringify(postsResponse, null, 2))
+  const postsPagination = {
+    results: posts,
+    next_page: String(postsResponse.next_page)
+  }
 
   return {
     props: {
-      postsResponse
+      postsPagination
     }
   }
 }
