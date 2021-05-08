@@ -83,24 +83,10 @@ export default function Home({ postsPagination }: HomeProps) {
             </div>
           </a>
 
-          <a>
-            <h1>Como Utilizar Hooks</h1>
-            <p>Pensando em sincronização em vez de ciclos de vida.</p>
-            <div>
-              <time>
-                <FiCalendar />
-              15 Mar 2021
-            </time>
-              <span>
-                <FiUser />
-              Joseph Oliveira
-            </span>
-            </div>
-          </a>
-
-          <button type="button">
-            Carregar mais posts
-          </button>
+          {!!nextPage && (
+            <button type="button" onClick={handleNextPageData}>
+              Carregar mais posts
+            </button>
         </div>
 
 
