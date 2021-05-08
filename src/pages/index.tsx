@@ -6,9 +6,12 @@ import Prismic from '@prismicio/client'
 import { GetStaticProps } from 'next';
 import { FiCalendar, FiUser } from 'react-icons/fi'
 import { getPrismicClient } from '../services/prismic';
+import { format, parseISO } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
+import { useState } from 'react';
 
 interface Post {
   uid?: string;
