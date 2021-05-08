@@ -32,7 +32,38 @@ interface HomeProps {
   postsPagination: PostPagination;
 }
 
-export default function Home() {
+export default function Home({ postsPagination }: HomeProps) {
+  const { next_page, results } = postsPagination;
+
+  const [posts, setPosts] = useState<Post[]>(results)
+  const [nextPage, setNextPage] = useState<string>(next_page)
+
+  async function handleNextPageData() {
+    if (nextPage) {
+      const response = await fetch(nextPage)
+      const nextPageFetch = await response.json()
+      console.log(nextPageFetch)
+
+      if (nextPage !== '') {
+        const nextPagePosts = nextPageFetch.results.map(post => {
+          return {
+            uid: post.uid,
+            first_publication_date: format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR }),
+            data: {
+              title: post.data.title,
+              subtitle: post.data.subtitle,
+              author: post.data.author,
+            },
+          }
+        })
+
+        setPosts([...posts, ...nextPagePosts])
+      }
+
+      nextPageFetch.next_page !== null ? setNextPage(nextPageFetch.next_page) : setNextPage('')
+    }
+  }
+
   return (
     <>
       <main className={styles.homeContainer}>
