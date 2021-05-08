@@ -74,10 +74,10 @@ export default function Home({ postsPagination }: HomeProps) {
             <div>
               <time>
                 <FiCalendar />
-              15 Mar 2021
-            </time>
-              <span>
-                <FiUser />
+                  {post.first_publication_date}
+                </time>
+                <span>
+                  <FiUser />
               Joseph Oliveira
             </span>
             </div>
@@ -87,6 +87,7 @@ export default function Home({ postsPagination }: HomeProps) {
             <button type="button" onClick={handleNextPageData}>
               Carregar mais posts
             </button>
+          )}
         </div>
 
 
