@@ -81,13 +81,17 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsResponse = await prismic.query([
     Prismic.predicates.at('document.type', 'posts'),
   ], {
-    fetch: ['posts.title', 'posts.content', 'posts.author'],
+    fetch: ['posts.title', 'posts.subtitle', 'posts.content', 'posts.author'],
     pageSize: 1,
   })
 
   const posts = postsResponse.results.map(post => {
     return {
       slug: post.uid,
+      title: post.data.title,
+      subtitle: post.data.subtitle,
+      author: post.data.author,
+      first_publication_date: format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })
     }
   })
 
