@@ -1,7 +1,3 @@
-// import { GetStaticProps } from 'next';
-
-// import { getPrismicClient } from '../services/prismic';
-
 import Prismic from '@prismicio/client'
 import { GetStaticProps } from 'next';
 import { FiCalendar, FiUser } from 'react-icons/fi'
@@ -116,7 +112,7 @@ export const getStaticProps: GetStaticProps = async () => {
         title: post.data.title,
         subtitle: post.data.subtitle,
         author: post.data.author,
-      first_publication_date: format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })
+      },
     }
   })
 
