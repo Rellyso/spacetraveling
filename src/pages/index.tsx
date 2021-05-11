@@ -8,6 +8,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface Post {
   uid?: string;
@@ -65,20 +66,22 @@ export default function Home({ postsPagination }: HomeProps) {
       <main className={styles.homeContainer}>
         <div className={styles.homeContent}>
           {posts.map((post: Post) => (
-            <a key={post.uid}>
-              <h1>{post.data.title}</h1>
-              <p>{post.data.subtitle}</p>
-              <div>
-                <time>
-                  <FiCalendar />
-                  {post.first_publication_date}
-                </time>
-                <span>
-                  <FiUser />
-                  {post.data.author}
-                </span>
-              </div>
-            </a>
+            <Link href={`/post/${post.uid}`}>
+              <a key={post.uid}>
+                <h1>{post.data.title}</h1>
+                <p>{post.data.subtitle}</p>
+                <div>
+                  <time>
+                    <FiCalendar />
+                    {post.first_publication_date}
+                  </time>
+                  <span>
+                    <FiUser />
+                    {post.data.author}
+                  </span>
+                </div>
+              </a>
+            </Link>
           ))}
 
           {!!nextPage && (
@@ -124,6 +127,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       postsPagination
-    }
+    },
+    revalidate: 60 * 60 * 24,
   }
 }
