@@ -30,11 +30,17 @@ export default function Post() {
   // TODO
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+
   const prismic = getPrismicClient();
   // const posts = await prismic.query(TODO);
 
-  // TODO
+  return {
+    paths: [
+      { params: { slug: 'como-utilizar-hooks' } }
+    ],
+    fallback: 'blocking'
+  }
 };
 
 export const getStaticProps = async context => {
