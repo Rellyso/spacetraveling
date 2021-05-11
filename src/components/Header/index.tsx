@@ -5,7 +5,7 @@ export default function Header() {
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
         <span>
-          <img src="/logo.svg" alt="spacetraveling" />
+          <img src="/logo.svg" alt="logo" />
           spacetraveling
           <strong>.</strong>
         </span>
