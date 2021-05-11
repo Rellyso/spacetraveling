@@ -69,5 +69,10 @@ export const getStaticProps: GetStaticProps = async context => {
 
   console.log(JSON.stringify(post, undefined, 4));
 
-  // TODO
+  return {
+    props: {
+      // post
+    },
+    revalidate: 60 * 60, // 60 minutos
+  }
 };
