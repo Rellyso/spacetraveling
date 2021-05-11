@@ -43,7 +43,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
+  const { slug } = context.params
+
   const prismic = getPrismicClient();
   // const response = await prismic.getByUID(TODO);
 
