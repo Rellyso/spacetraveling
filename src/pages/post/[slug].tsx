@@ -33,22 +33,22 @@ interface PostProps {
 export default function Post() {
   return (
     <>
-      <main className={styles.postContainer}>
-        <article className={styles.post}>
-          <div
-            className={styles.postImage}
-            style={{ backgroundImage: 'url(https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F963ff31f-5679-4a7d-a81c-e5de7f7b10e7%2FUntitled.png?table=block&id=9bc47e5c-4bf6-49f4-b79d-7d129bc48da9&width=1780&userId=a09f7fa9-7b49-4853-a309-46454ab9a756&cache=v2)' }}
-          />
+      <article className={styles.postContainer}>
+        <div
+          className={styles.postImage}
+          style={{ backgroundImage: `url(${post.data.banner.url})` }}
+        />
+        <div className={styles.post}>
           <header>
             <h1>Criando um APP CRA do zero.</h1>
             <div>
               <time>
                 <FiCalendar />
-                15 mar 2021
+                {post.first_publication_date}
               </time>
               <span>
                 <FiUser />
-                Joseph Oliveira
+                {post.data.author}
               </span>
               <span>
                 <FiClock />
@@ -57,12 +57,16 @@ export default function Post() {
             </div>
           </header>
 
-          <div
-            className={styles.postContent}
-          // dangerouslySetInnerHTML={{ __html: post.data.content.body.text }}
-          />
 
-        </article>
+          {post.data.content.map(content => (
+            <div key={content.heading} className={styles.postContent}>
+              <h2>{content.heading}</h2>
+
+              <div dangerouslySetInnerHTML={{ __html: content.body }} />
+            </div>
+          ))}
+        </div>
+      </article>
 
 
       </main>
