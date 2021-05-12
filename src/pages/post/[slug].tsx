@@ -73,13 +73,23 @@ export default function Post() {
 export const getStaticPaths: GetStaticPaths = async () => {
 
   const prismic = getPrismicClient();
-  // const posts = await prismic.query(TODO);
+
+  const posts = await prismic.query(
+    [Prismic.predicates.at('document.type', 'posts')],
+    {
+      fetch: ['posts.title', 'posts.subtitle', 'posts.author', 'posts.content'],
+    }
+  );
+
+  const paths = posts.results.map(post => ({
+    params: { slug: post.uid },
+  }));
+
+  paths.splice(0, 1)
 
   return {
-    paths: [
-      { params: { slug: 'como-utilizar-hooks' } }
-    ],
-    fallback: 'blocking'
+    paths,
+    fallback: true
   }
 };
 
