@@ -2,12 +2,14 @@ import ptBR from 'date-fns/locale/pt-BR'
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { format, parseISO } from 'date-fns'
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
+import { useRouter } from 'next/router'
 
+import { RichText } from 'prismic-dom';
 import { getPrismicClient } from '../../services/prismic';
+import Prismic from '@prismicio/client'
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
-import { RichText } from 'prismic-dom';
 
 interface Post {
   first_publication_date: string | null;
@@ -19,9 +21,7 @@ interface Post {
     author: string;
     content: {
       heading: string;
-      body: {
-        text: string;
-      }[];
+      body: string;
     }[];
   };
 }
@@ -74,15 +74,11 @@ export default function Post({ post }: PostProps) {
           ))}
         </div>
       </article>
-
-
-      </main>
     </>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-
   const prismic = getPrismicClient();
 
   const posts = await prismic.query(
@@ -132,7 +128,7 @@ export const getStaticProps: GetStaticProps = async context => {
     },
   }
 
-  console.log(JSON.stringify(post, undefined, 4));
+  // console.log(JSON.stringify(post, undefined, 4));
 
   return {
     props: response ? {
