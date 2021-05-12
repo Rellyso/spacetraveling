@@ -40,7 +40,7 @@ export default function Post() {
         />
         <div className={styles.post}>
           <header>
-            <h1>Criando um APP CRA do zero.</h1>
+            <h1>{post.data.title}</h1>
             <div>
               <time>
                 <FiCalendar />
@@ -52,8 +52,8 @@ export default function Post() {
               </span>
               <span>
                 <FiClock />
-                4 min
-              </span>
+                  4 min
+                </span>
             </div>
           </header>
 
