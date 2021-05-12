@@ -30,7 +30,14 @@ interface PostProps {
   post: Post;
 }
 
-export default function Post() {
+export default function Post({ post }: PostProps) {
+  const router = useRouter();
+
+  // cálculo do tempo estimado de leitura
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <article className={styles.postContainer}>
