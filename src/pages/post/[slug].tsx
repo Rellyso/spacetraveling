@@ -87,12 +87,13 @@ export const getStaticProps: GetStaticProps = async context => {
   const { slug } = context.params
 
   const prismic = getPrismicClient();
+
   const response = await prismic.getByUID('posts', String(slug), {});
 
   const content = response.data.group.map(content => {
     return {
       heading: content.heading,
-      body: content.body.map(body => body.text)
+      body: RichText.asHtml(content.body),
     }
   })
 
@@ -103,16 +104,19 @@ export const getStaticProps: GetStaticProps = async context => {
       title: response.data.title,
       subtitle: response.data.subtitle,
       author: response.data.author,
-      body: [...content]
+      banner: {
+        url: response.data.banner.url,
+      },
+      content: [...content]
     },
   }
 
   console.log(JSON.stringify(post, undefined, 4));
 
   return {
-    props: {
-      // post
-    },
-    revalidate: 60 * 60, // 60 minutos
+    props: response ? {
+      post
+    } : {},
+    revalidate: 1, // 60 minutos
   }
 };
