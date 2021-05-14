@@ -4,9 +4,10 @@ import { format, parseISO } from 'date-fns'
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
 import { useRouter } from 'next/router'
 
-import { RichText } from 'prismic-dom';
+import { RichText, } from 'prismic-dom';
 import { getPrismicClient } from '../../services/prismic';
 import Prismic from '@prismicio/client'
+
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
@@ -33,10 +34,22 @@ interface PostProps {
 export default function Post({ post }: PostProps) {
   const router = useRouter();
 
-  // cálculo do tempo estimado de leitura
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
+  // cálculo do tempo estimado de leitura
+  function calculateReadingTime() {
+    // qtd de palavras / 200 (média de leitura por min)
+    // arredondar o valor para cima
+    const contentAsText = post.data.content.map(content => {
+
+    })
+
+    console.log(contentAsText)
+  }
+
+  calculateReadingTime();
 
   return (
     <>
@@ -66,7 +79,8 @@ export default function Post({ post }: PostProps) {
 
 
           {post.data.content.map(content => (
-            <div key={content.heading} className={styles.postContent}>
+
+            <div key={content.heading} className={styles.postContent} >
               <h2>{content.heading}</h2>
 
               <div dangerouslySetInnerHTML={{ __html: content.body }} />
@@ -111,8 +125,10 @@ export const getStaticProps: GetStaticProps = async context => {
     return {
       heading: content.heading,
       body: RichText.asHtml(content.body),
+
     }
   })
+
 
   const post = {
     uid: response.uid,
