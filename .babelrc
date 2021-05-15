@@ -1,5 +1,10 @@
 {
   "presets": [
-    "next/babel"
+    [
+      "next/babel"
+    ]
+  ],
+  "plugins": [
+    "emotion"
   ]
 }
