@@ -79,6 +79,7 @@ export default function Post({ post }: PostProps) {
           className={styles.postImage}
           style={{ backgroundImage: `url(${post.data.banner.url})` }}
         />
+
         <div className={styles.post}>
           <header>
             <h1>{post.data.title}</h1>
@@ -93,7 +94,7 @@ export default function Post({ post }: PostProps) {
               </span>
               <span>
                 <FiClock />
-                  4 min
+                {readingTime} min
                 </span>
             </div>
           </header>
