@@ -164,7 +164,8 @@ export const getStaticProps: GetStaticProps = async context => {
       banner: {
         url: response.data.banner.url,
       },
-      content: [...content]
+      content: [...content],
+      contentAsText: [...contentAsText]
     },
   }
 
