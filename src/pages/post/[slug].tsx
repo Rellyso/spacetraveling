@@ -59,7 +59,8 @@ export default function Post({ post }: PostProps) {
       setReadingTime(Math.ceil(bodyWords / averageReadingTime))
     }
 
-    })
+    getAverageTimeReading()
+  }, [])
 
     console.log(contentAsText)
   }
