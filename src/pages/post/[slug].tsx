@@ -147,6 +147,8 @@ export const getStaticProps: GetStaticProps = async context => {
     return {
       heading: content.heading,
       body: RichText.asHtml(content.body),
+    }
+  })
 
     }
   })
