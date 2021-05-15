@@ -1,13 +1,15 @@
+import { useEffect, useState } from 'react';
 import ptBR from 'date-fns/locale/pt-BR'
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { format, parseISO } from 'date-fns'
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
+import Head from "next/head"
 import { useRouter } from 'next/router'
+import BounceLoader from "react-spinners/BounceLoader";
 
 import { RichText, } from 'prismic-dom';
 import { getPrismicClient } from '../../services/prismic';
 import Prismic from '@prismicio/client'
-
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
@@ -65,11 +67,6 @@ export default function Post({ post }: PostProps) {
 
     getAverageTimeReading()
   }, [])
-
-    console.log(contentAsText)
-  }
-
-  calculateReadingTime();
 
   return (
     <>
@@ -154,6 +151,10 @@ export const getStaticProps: GetStaticProps = async context => {
     }
   })
 
+  const contentAsText = response.data.group.map(content => {
+    return {
+      heading: content.heading,
+      body: RichText.asText(content.body),
     }
   })
 
