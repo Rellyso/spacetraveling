@@ -13,6 +13,7 @@ import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
 
 interface Post {
+  uid?: string;
   first_publication_date: string | null;
   data: {
     title: string;
@@ -21,6 +22,10 @@ interface Post {
     };
     author: string;
     content: {
+      heading: string;
+      body: string;
+    }[];
+    contentAsText: {
       heading: string;
       body: string;
     }[];
