@@ -37,6 +37,7 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
+  const [readingTime, setReadingTime] = useState(0);
   const router = useRouter();
 
   if (router.isFallback) {
@@ -44,10 +45,19 @@ export default function Post({ post }: PostProps) {
   }
 
   // cálculo do tempo estimado de leitura
-  function calculateReadingTime() {
-    // qtd de palavras / 200 (média de leitura por min)
-    // arredondar o valor para cima
-    const contentAsText = post.data.content.map(content => {
+  useEffect(() => {
+    async function getAverageTimeReading() {
+      const { contentAsText } = post.data
+      const averageReadingTime = 200
+      // quantidade de palavras com reduce - OK
+      const bodyWords = contentAsText.map(content => content.body)
+        .reduce((prev, curr) => curr.split(" ").length + prev, 0)
+
+      // qtd de palavras / 200 (média de leitura por min)
+      // arredondar o valor para cima
+
+      setReadingTime(Math.ceil(bodyWords / averageReadingTime))
+    }
 
     })
 
