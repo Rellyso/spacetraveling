@@ -41,7 +41,11 @@ export default function Post({ post }: PostProps) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <div>Loading...</div>;
+    return (
+      <div className={commonStyles.loading}>
+        <BounceLoader color="#FF57B2" loading={router.isFallback} size={60} />
+      </div>
+    )
   }
 
   // cálculo do tempo estimado de leitura
