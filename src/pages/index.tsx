@@ -9,6 +9,7 @@ import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
 import { useState } from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 
 interface Post {
   uid?: string;
@@ -39,7 +40,6 @@ export default function Home({ postsPagination }: HomeProps) {
     if (nextPage) {
       const response = await fetch(nextPage)
       const nextPageFetch = await response.json()
-      console.log(nextPageFetch)
 
       if (nextPage !== '') {
         const nextPagePosts = nextPageFetch.results.map(post => {
@@ -63,7 +63,11 @@ export default function Home({ postsPagination }: HomeProps) {
 
   return (
     <>
-      <main className={styles.homeContainer}>
+      <Head>
+        <title>Início | spacetraveling</title>
+      </Head>
+
+      <main className={`${styles.homeContainer} ${commonStyles.commom}`}>
         <div className={styles.homeContent}>
           {posts.map((post: Post) => (
             <Link href={`/post/${post.uid}`} key={post.uid}>
@@ -90,8 +94,6 @@ export default function Home({ postsPagination }: HomeProps) {
             </button>
           )}
         </div>
-
-
       </main>
     </>
   )
@@ -104,7 +106,7 @@ export const getStaticProps: GetStaticProps = async () => {
     Prismic.predicates.at('document.type', 'posts'),
   ], {
     fetch: ['posts.title', 'posts.subtitle', 'posts.content', 'posts.author'],
-    pageSize: 1,
+    pageSize: 2,
   })
 
   const posts = postsResponse.results.map(post => {
