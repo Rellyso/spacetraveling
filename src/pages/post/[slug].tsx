@@ -69,7 +69,12 @@ export default function Post({ post }: PostProps) {
 
   return (
     <>
-      <article className={styles.postContainer}>
+      <Head>
+        <title>{post.data.title} | spacetraveling</title>
+      </Head>
+
+      <article className={`${styles.postContainer} ${commonStyles.commom}`}>
+
         <div
           className={styles.postImage}
           style={{ backgroundImage: `url(${post.data.banner.url})` }}
