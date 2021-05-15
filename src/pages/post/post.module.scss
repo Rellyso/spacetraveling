@@ -1,10 +1,8 @@
 
 
 .postContainer {
-  max-width: 1440px;
+  max-width: 1440px !important;
   
-  margin: 0 auto;
-
   .postImage {
     height: 25rem;
     width: 100%;
@@ -76,10 +74,6 @@
           line-height: 1.25rem;
           text-align: justify;
           padding-bottom: 1.5625rem;
-          
-          &:last-child {
-            padding: 0;
-          }
 
           strong {
             font-weight: bold;
@@ -91,6 +85,12 @@
             &:hover {
               text-decoration: underline;
             }
+          }
+        }
+        
+        ul, li {
+          &:last-child {
+            padding: 0;
           }
         }
       }
