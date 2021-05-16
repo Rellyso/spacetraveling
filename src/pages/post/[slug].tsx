@@ -15,7 +15,7 @@ import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
 
 interface Post {
-  uid?: string;
+  // uid?: string;
   first_publication_date: string | null;
   data: {
     title: string;
@@ -25,8 +25,9 @@ interface Post {
     author: string;
     content: {
       heading: string;
-      body: string;
-    }[];
+      body: {
+        text: string;
+      }[];
     contentAsText: {
       heading: string;
       body: string;
@@ -161,7 +162,7 @@ export const getStaticProps: GetStaticProps = async context => {
 
   const post = {
     uid: response.uid,
-    first_publication_date: format(parseISO(response.first_publication_date), 'd MMM yyyy', { locale: ptBR }),
+    first_publication_date: response.first_publication_date,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
