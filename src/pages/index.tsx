@@ -91,9 +91,14 @@ export default function Home({ postsPagination }: HomeProps) {
           ))}
 
           {!!nextPage && (
-            <button type="button" onClick={handleNextPageData}>
-              Carregar mais posts
-            </button>
+            <div className={styles.buttonContainer}>
+              <button type="button" onClick={handleNextPageData}>
+                Carregar mais posts
+              </button>
+              { isLoading && (
+                <BounceLoader color="#FF57B2" loading={isLoading} size={15} />
+              )}
+            </div>
           )}
         </div>
       </main>
