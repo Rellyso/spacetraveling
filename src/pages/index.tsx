@@ -1,15 +1,19 @@
-import Prismic from '@prismicio/client'
+import { useState } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
 import { GetStaticProps } from 'next';
-import { FiCalendar, FiUser } from 'react-icons/fi'
+import Prismic from '@prismicio/client'
 import { getPrismicClient } from '../services/prismic';
+
+import { FiCalendar, FiUser } from 'react-icons/fi'
+import Header from '../components/Header';
+import BounceLoader from "react-spinners/BounceLoader";
+
 import { format, parseISO } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
-import { useState } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
 
 interface Post {
   uid?: string;
@@ -35,30 +39,37 @@ export default function Home({ postsPagination }: HomeProps) {
 
   const [posts, setPosts] = useState<Post[]>(results)
   const [nextPage, setNextPage] = useState<string>(next_page)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   async function handleNextPageData() {
-    if (nextPage) {
-      const response = await fetch(nextPage)
-      const nextPageFetch = await response.json()
+    setIsLoading(true)
+    try {
+      if (nextPage) {
+        const response = await fetch(nextPage)
+        const nextPageFetch = await response.json()
 
-      if (nextPage !== '') {
-        const nextPagePosts = nextPageFetch.results.map(post => {
-          return {
-            uid: post.uid,
-            first_publication_date: format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR }),
-            data: {
-              title: post.data.title,
-              subtitle: post.data.subtitle,
-              author: post.data.author,
-            },
-          }
-        })
+        if (nextPage !== '') {
+          const nextPagePosts = nextPageFetch.results.map(post => {
+            return {
+              uid: post.uid,
+              first_publication_date: post.first_publication_date,
+              data: {
+                title: post.data.title,
+                subtitle: post.data.subtitle,
+                author: post.data.author,
+              },
+            }
+          })
 
-        setPosts([...posts, ...nextPagePosts])
+          setPosts([...posts, ...nextPagePosts])
+        }
+
+        nextPageFetch.next_page !== null ? setNextPage(nextPageFetch.next_page) : setNextPage('')
       }
-
-      nextPageFetch.next_page !== null ? setNextPage(nextPageFetch.next_page) : setNextPage('')
+    } catch (err) {
+      return
     }
+    setIsLoading(false)
   }
 
   return (
