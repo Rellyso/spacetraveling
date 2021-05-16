@@ -119,7 +119,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   ]);
 
   const paths = posts.results.map(post => ({
-    params: { slug: post.uid },
+    params: {
+      slug: post.uid
+    },
   }));
 
   paths.splice(0, 1)
@@ -136,21 +138,6 @@ export const getStaticProps: GetStaticProps = async context => {
   const prismic = getPrismicClient();
 
   const response = await prismic.getByUID('posts', String(slug), {});
-
-  const content = response.data.group.map(content => {
-    return {
-      heading: content.heading,
-      body: RichText.asHtml(content.body),
-    }
-  })
-
-  const contentAsText = response.data.group.map(content => {
-    return {
-      heading: content.heading,
-      body: RichText.asText(content.body),
-    }
-  })
-
 
   const post = {
     uid: response.uid,
