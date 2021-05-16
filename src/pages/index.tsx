@@ -77,7 +77,7 @@ export default function Home({ postsPagination }: HomeProps) {
                 <div>
                   <time>
                     <FiCalendar />
-                    {post.first_publication_date}
+                    {format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })}
                   </time>
                   <span>
                     <FiUser />
