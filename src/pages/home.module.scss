@@ -9,18 +9,18 @@
         margin-top: 1.75rem;
         padding-top: 1.75rem;
       }
-      
+
       h1 {
         font-size: 1.75rem;
         color: var(--heading);
-        
-        padding-bottom: .5rem;
+
+        padding-bottom: 0.5rem;
       }
-      
+
       p {
         font-size: 1.125rem;
       }
-      
+
       div {
         padding-top: 1.5625rem;
         display: flex;
@@ -30,7 +30,8 @@
           margin-right: 2rem;
         }
 
-        time, span {
+        time,
+        span {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -38,22 +39,29 @@
           font-size: 0.875rem;
 
           svg {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
           }
         }
       }
     }
 
-    button {
+    .buttonContainer {
       margin-top: 4rem;
 
-      background: none;
-      border: none;
+      display: flex;
+      align-items: center;
 
-      font-size: 1.125rem;
-      font-weight: 600;
+      button {
+        background: none;
+        border: none;
 
-      color: var(--highlight);
+        font-size: 1.125rem;
+        font-weight: 600;
+
+        color: var(--highlight);
+
+        padding-right: 5px;
+      }
     }
   }
 }
