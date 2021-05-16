@@ -69,7 +69,9 @@ export default function Post({ post }: PostProps) {
         <title>{post.data.title} | spacetraveling</title>
       </Head>
 
-      <article className={`${styles.postContainer} ${commonStyles.commom}`}>
+      <Header />
+
+      <div className={`${styles.postContainer} ${commonStyles.commom}`}>
 
         <div
           className={styles.postImage}
