@@ -97,16 +97,16 @@ export default function Post({ post }: PostProps) {
           </header>
 
 
-          {post.data.content.map(content => (
+          {post.data.content.map((content, index) => (
 
             <div key={content.heading} className={styles.postContent} >
               <h2>{content.heading}</h2>
 
-              <div dangerouslySetInnerHTML={{ __html: content.body }} />
+              <div dangerouslySetInnerHTML={{ __html: RichText.asHtml(content.body) }} />
             </div>
           ))}
-        </div>
-      </article>
+        </article>
+      </div>
     </>
   )
 }
