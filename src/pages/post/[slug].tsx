@@ -149,17 +149,19 @@ export const getStaticProps: GetStaticProps = async context => {
       banner: {
         url: response.data.banner.url,
       },
-      content: [...content],
-      contentAsText: [...contentAsText]
+      content: response.data.group.map(item => {
+        return {
+          heading: item.heading,
+          body: [...item.body]
+        }
+      }),
     },
   }
 
-  // console.log(JSON.stringify(post, undefined, 4));
-
   return {
-    props: response ? {
+    props: {
       post
-    } : {},
-    revalidate: 1, // 60 minutos
+    },
+    revalidate: 60 * 60, // 60 minutos
   }
 };
