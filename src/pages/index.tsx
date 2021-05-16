@@ -111,10 +111,10 @@ export const getStaticProps: GetStaticProps = async () => {
     pageSize: 2,
   })
 
-  const posts = postsResponse.results.map(post => {
+  const posts = postsResponse.results.map((post): Post => {
     return {
       uid: post.uid,
-      first_publication_date: format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR }),
+      first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
