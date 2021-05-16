@@ -59,6 +59,8 @@ export default function Post({ post }: PostProps) {
 
   const readingTime = Math.ceil(totalWords / 200);
 
+  const formattedPublicationDate = format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })
+
 
   return (
     <>
@@ -81,7 +83,7 @@ export default function Post({ post }: PostProps) {
             <div>
               <time>
                 <FiCalendar />
-                {post.first_publication_date}
+                {formattedPublicationDate}
               </time>
               <span>
                 <FiUser />
