@@ -47,6 +47,7 @@ export default function Post({ post }: PostProps) {
     return (
       <div className={commonStyles.loading}>
         <BounceLoader color="#FF57B2" loading={router.isFallback} size={60} />
+        Carregando...
       </div>
     )
   }
