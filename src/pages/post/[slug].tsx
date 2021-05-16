@@ -13,6 +13,7 @@ import Prismic from '@prismicio/client'
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import Header from '../../components/Header';
 
 interface Post {
   first_publication_date: string | null;
