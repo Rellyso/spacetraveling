@@ -14,6 +14,8 @@ import Prismic from '@prismicio/client'
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
 import Header from '../../components/Header';
+import { Comments } from '../../components/Comments';
+import Link from 'next/link';
 
 interface Post {
   first_publication_date: string | null;
@@ -106,6 +108,27 @@ export default function Post({ post }: PostProps) {
             </div>
           ))}
         </article>
+
+        <footer>
+          <span className={styles.divider} />
+
+          <div className={styles.posts}>
+            <Link href="http://localhost:3000/post/como-utilizar-hooks">
+              <a className={styles.prevPost}>
+                Como utilizar Hooks
+              <strong>Post anterior</strong>
+              </a>
+            </Link>
+            <Link href="http://localhost:3000/post/como-utilizar-hooks">
+              <a className={styles.nextPost}>
+                Como utilizar Hooks
+              <strong>Próximo post</strong>
+              </a>
+            </Link>
+          </div>
+
+          <Comments />
+        </footer>
       </div>
     </>
   )
