@@ -124,8 +124,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   }));
 
-  paths.splice(0, 1)
-
   return {
     paths,
     fallback: true
