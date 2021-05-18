@@ -72,13 +72,12 @@ export default function Post({ post }: PostProps) {
 
       <Header />
 
+      <div
+        className={styles.postImage}
+        style={{ backgroundImage: `url(${post.data.banner.url})` }}
+      />
+
       <div className={`${styles.postContainer} ${commonStyles.commom}`}>
-
-        <div
-          className={styles.postImage}
-          style={{ backgroundImage: `url(${post.data.banner.url})` }}
-        />
-
         <article className={styles.post}>
           <header>
             <h1>{post.data.title}</h1>
