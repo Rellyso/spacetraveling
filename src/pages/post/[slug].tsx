@@ -63,7 +63,6 @@ export default function Post({ post }: PostProps) {
 
   const formattedPublicationDate = format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })
 
-
   return (
     <>
       <Head>
