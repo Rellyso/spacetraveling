@@ -1,31 +1,28 @@
+.postImage {
+  max-width: 1440px;
 
+  height: 25rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .postContainer {
-  max-width: 1440px !important;
-  
-  .postImage {
-    height: 25rem;
-    width: 100%;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-  
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  padding: 5rem 2rem;
 
   .post {
-    padding: 5rem 2rem;
-
     header {
       display: flex;
       align-items: flex-start;
       flex-direction: column;
 
-      max-width: 1120px;
       margin-bottom: 5rem;
 
       h1 {
@@ -39,21 +36,22 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        
-        time, span {
+
+        time,
+        span {
           display: flex;
           align-items: center;
           justify-content: flex-start;
-          
+
           font-size: 0.875rem;
-          
+
           margin-right: 2rem;
 
           &:last-child {
             margin: 0;
           }
           svg {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
           }
         }
       }
@@ -68,9 +66,11 @@
       }
 
       & > div {
-        p, ul, li {
+        p,
+        ul,
+        li {
           color: var(--gray-300);
-          
+
           line-height: 1.25rem;
           text-align: justify;
           padding-bottom: 1.5625rem;
@@ -87,8 +87,9 @@
             }
           }
         }
-        
-        ul, li {
+
+        ul,
+        li {
           &:last-child {
             padding: 0;
           }
@@ -134,4 +135,7 @@
         &.nextPost {
           text-align: right;
         }
+      }
+    }
+  }
 }
