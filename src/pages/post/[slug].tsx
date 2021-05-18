@@ -149,7 +149,7 @@ export const getStaticProps: GetStaticProps = async context => {
       banner: {
         url: response.data.banner.url,
       },
-      content: response.data.group.map(item => {
+      content: response.data.content.map(item => {
         return {
           heading: item.heading,
           body: [...item.body]
