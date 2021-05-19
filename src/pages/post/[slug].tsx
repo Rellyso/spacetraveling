@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
 import ptBR from 'date-fns/locale/pt-BR'
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { format, parseISO } from 'date-fns'
+import { format } from 'date-fns'
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
 import Head from "next/head"
 import { useRouter } from 'next/router'
