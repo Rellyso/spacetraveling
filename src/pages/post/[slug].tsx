@@ -36,10 +36,27 @@ interface Post {
 
 interface PostProps {
   post: Post;
+  preview: boolean;
+  navigation: {
+    prevPost?: {
+      uid: string;
+      data: {
+        title: string;
+      }
+    };
+    nextPost?: {
+      uid: string;
+      data: {
+        title: string;
+      }
+    };
+  }
 }
 
 export default function Post({ post }: PostProps) {
   const router = useRouter();
+
+  const { prevPost, nextPost } = navigation;
 
   if (router.isFallback) {
     return (
@@ -172,7 +189,27 @@ export const getStaticProps: GetStaticProps = async context => {
 
   const prismic = getPrismicClient();
 
-  const response = await prismic.getByUID('posts', String(slug), {});
+  const response = await prismic.getByUID('posts', String(slug), {
+    ref: previewData?.ref || null,
+  });
+
+  const prevPost = await prismic.query(
+    [Prismic.predicates.at('document.type', 'posts')],
+    {
+      pageSize: 1,
+      after: response.id,
+      orderings: '[document.first_publication_date]'
+    }
+  )
+
+  const nextPost = await prismic.query(
+    [Prismic.Predicates.at('document.type', 'posts')],
+    {
+      pageSize: 1,
+      after: response.id,
+      orderings: '[document.first_publication_date desc]',
+    }
+  );
 
   const post = {
     uid: response.uid,
