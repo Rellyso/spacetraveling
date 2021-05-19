@@ -112,12 +112,23 @@ export default function Home({ postsPagination }: HomeProps) {
             </div>
           )}
         </div>
+
+        {preview && (
+          <aside>
+            <Link href="/api/exit-preview">
+              <a>Sair do modo preview</a>
+            </Link>
+          </aside>
+        )}
       </main>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async ({
+  preview = false,
+  previewData
+}) => {
   const prismic = getPrismicClient();
 
   const postsResponse = await prismic.query([
@@ -125,6 +136,7 @@ export const getStaticProps: GetStaticProps = async () => {
   ], {
     fetch: ['posts.title', 'posts.subtitle', 'posts.content', 'posts.author'],
     pageSize: 2,
+    ref: previewData?.ref ?? null
   })
 
   const posts = postsResponse.results.map((post): Post => {
@@ -146,7 +158,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      postsPagination
+      postsPagination,
+      preview
     },
     revalidate: 60 * 60 * 24,
   }

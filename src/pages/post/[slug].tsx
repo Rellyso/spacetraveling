@@ -160,6 +160,14 @@ export default function Post({ post }: PostProps) {
 
           <Comments />
         </footer>
+
+        {preview && (
+          <aside>
+            <Link href="/api/exit-preview">
+              <a>Sair do modo preview</a>
+            </Link>
+          </aside>
+        )}
       </div>
     </>
   )
@@ -184,8 +192,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 };
 
-export const getStaticProps: GetStaticProps = async context => {
-  const { slug } = context.params
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  previewData,
+  preview = false
+}) => {
+  const { slug } = params
 
   const prismic = getPrismicClient();
 
