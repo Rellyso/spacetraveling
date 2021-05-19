@@ -94,6 +94,9 @@ export default function Post({ post }: PostProps) {
                 {readingTime} min
                 </span>
             </div>
+            <p>
+              * editado em {formattedLastEditDate}
+            </p>
           </header>
 
 
