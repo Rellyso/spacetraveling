@@ -120,9 +120,8 @@
     }
 
     .posts {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
 
       a {
         font-size: 1.125rem;
@@ -140,6 +139,7 @@
 
         &.nextPost {
           text-align: right;
+          grid-column-end: none;
         }
       }
     }
