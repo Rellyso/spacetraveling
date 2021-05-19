@@ -61,7 +61,17 @@ export default function Post({ post }: PostProps) {
 
   const readingTime = Math.ceil(totalWords / 200);
 
-  const formattedPublicationDate = format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })
+  const formattedPublicationDate = format(
+    new Date(post.first_publication_date),
+    'd MMM yyyy',
+    { locale: ptBR })
+
+  const formattedLastEditDate = format(
+    new Date(post.last_publication_date),
+    "d MMM yyyy ', às' HH:mm",
+    { locale: ptBR })
+
+  console.log(formattedLastEditDate)
 
   return (
     <>
