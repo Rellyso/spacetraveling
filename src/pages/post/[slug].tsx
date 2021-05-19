@@ -19,6 +19,7 @@ import Link from 'next/link';
 
 interface Post {
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     banner: {
@@ -53,7 +54,7 @@ interface PostProps {
   }
 }
 
-export default function Post({ post }: PostProps) {
+export default function Post({ post, preview, navigation }: PostProps) {
   const router = useRouter();
 
   const { prevPost, nextPost } = navigation;
@@ -226,6 +227,7 @@ export const getStaticProps: GetStaticProps = async ({
   const post = {
     uid: response.uid,
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     data: {
       title: response.data.title,
       subtitle: response.data.subtitle,
@@ -244,7 +246,12 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: {
-      post
+      post,
+      preview,
+      navigation: {
+        prevPost: prevPost?.results[0] || null,
+        nextPost: nextPost?.results[0] || null,
+      }
     },
     revalidate: 60 * 60, // 60 minutos
   }
