@@ -32,9 +32,13 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean;
 }
 
-export default function Home({ postsPagination }: HomeProps) {
+export default function Home({
+  postsPagination,
+  preview
+}: HomeProps): JSX.Element {
   const { next_page, results } = postsPagination;
 
   const [posts, setPosts] = useState<Post[]>(results)
@@ -90,7 +94,7 @@ export default function Home({ postsPagination }: HomeProps) {
                 <div>
                   <time>
                     <FiCalendar />
-                    {format(parseISO(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })}
+                    {format(new Date(post.first_publication_date), 'd MMM yyyy', { locale: ptBR })}
                   </time>
                   <span>
                     <FiUser />
