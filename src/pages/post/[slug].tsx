@@ -141,7 +141,7 @@ export default function Post({ post, preview, navigation }: PostProps) {
           <span className={styles.divider} />
           <div className={styles.posts}>
             {!!prevPost && (
-              <Link href={`http://localhost:3000/post/${prevPost.uid}`}>
+              <Link href={`/post/${prevPost.uid}`}>
                 <a className={styles.prevPost}>
                   {prevPost.data.title}
                   <strong>Post anterior</strong>
@@ -149,7 +149,7 @@ export default function Post({ post, preview, navigation }: PostProps) {
               </Link>
             )}
             {!!nextPost && (
-              <Link href={`http://localhost:3000/post/${nextPost.uid}`}>
+              <Link href={`/post/${nextPost.uid}`}>
                 <a className={styles.nextPost}>
                   {nextPost.data.title}
                   <strong>Próximo post</strong>
