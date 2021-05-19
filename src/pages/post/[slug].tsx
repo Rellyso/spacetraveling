@@ -43,20 +43,18 @@ interface PostProps {
       data: {
         title: string;
       }
-    };
+    } | null;
     nextPost?: {
       uid: string;
       data: {
         title: string;
       }
-    };
+    } | null;
   }
 }
 
 export default function Post({ post, preview, navigation }: PostProps) {
   const router = useRouter();
-
-  const { prevPost, nextPost } = navigation;
 
   if (router.isFallback) {
     return (
@@ -140,18 +138,18 @@ export default function Post({ post, preview, navigation }: PostProps) {
         <footer>
           <span className={styles.divider} />
           <div className={styles.posts}>
-            {!!prevPost && (
-              <Link href={`/post/${prevPost.uid}`}>
+            {!!navigation.prevPost && (
+              <Link href={`/post/${navigation.prevPost?.uid}`}>
                 <a className={styles.prevPost}>
-                  {prevPost.data.title}
+                  {navigation.prevPost.data.title}
                   <strong>Post anterior</strong>
                 </a>
               </Link>
             )}
-            {!!nextPost && (
-              <Link href={`/post/${nextPost.uid}`}>
+            {!!navigation.nextPost && (
+              <Link href={`/post/${navigation.nextPost.uid}`}>
                 <a className={styles.nextPost}>
-                  {nextPost.data.title}
+                  {navigation.nextPost.data.title}
                   <strong>Próximo post</strong>
                 </a>
               </Link>
