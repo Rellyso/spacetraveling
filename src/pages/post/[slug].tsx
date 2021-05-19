@@ -122,20 +122,23 @@ export default function Post({ post }: PostProps) {
 
         <footer>
           <span className={styles.divider} />
-
           <div className={styles.posts}>
-            <Link href="http://localhost:3000/post/como-utilizar-hooks">
-              <a className={styles.prevPost}>
-                Como utilizar Hooks
-              <strong>Post anterior</strong>
-              </a>
-            </Link>
-            <Link href="http://localhost:3000/post/como-utilizar-hooks">
-              <a className={styles.nextPost}>
-                Como utilizar Hooks
-              <strong>Próximo post</strong>
-              </a>
-            </Link>
+            {!!prevPost && (
+              <Link href={`http://localhost:3000/post/${prevPost.uid}`}>
+                <a className={styles.prevPost}>
+                  {prevPost.data.title}
+                  <strong>Post anterior</strong>
+                </a>
+              </Link>
+            )}
+            {!!nextPost && (
+              <Link href={`http://localhost:3000/post/${nextPost.uid}`}>
+                <a className={styles.nextPost}>
+                  {nextPost.data.title}
+                  <strong>Próximo post</strong>
+                </a>
+              </Link>
+            )}
           </div>
 
           <Comments />
